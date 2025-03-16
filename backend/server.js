@@ -35,12 +35,12 @@ app.get("/license", (req, res) => {
 app.post("/api/match", async (req, res) => {
     try {
         console.log("\nReceived a face matching request...");
-
+        
         if (!req.body.images || req.body.images.length !== 2) {
             console.error("Invalid request: Expected 2 images, but received:", req.body.images?.length || 0);
             return res.status(400).json({ error: "Invalid request. Expected 2 images." });
         }
-
+        
         const requestBody = {
             tag: "face_matching",
             thumbnails: null,

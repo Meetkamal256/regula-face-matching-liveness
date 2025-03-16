@@ -32,65 +32,72 @@ const Verification = () => {
     });
   };
   
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!selfie || !idPhoto) {
-      alert("Please upload both a selfie and an ID photo.");
-      return;
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  
+  if (!selfie || !idPhoto) {
+    alert("Please upload both a selfie and an ID photo.");
+    return;
+  }
+  
+  setLoading(true);
+  setResult("");
+  
+  try {
+    console.log("🔄 Converting images to base64...");
+    
+    const selfieBase64 = await convertToBase64(selfie);
+    const idPhotoBase64 = await convertToBase64(idPhoto);
+    
+    // Debug: Check base64 data
+    console.log("Selfie Base64 Sample:", selfieBase64.substring(0, 50)); 
+    console.log("ID Photo Base64 Sample:", idPhotoBase64.substring(0, 50));
+    
+    console.log("Assigned Image Types:", {
+      selfie: 3,  // Selfie should be imageType 3
+      idPhoto: 1   // ID Photo should be imageType 1
+    });
+    
+    const requestBody = {
+      tag: "face_matching",
+      thumbnails: null,
+      images: [
+        { imageType: 3, image: selfieBase64 },
+        { imageType: 1, image: idPhotoBase64 }
+      ]
+    };
+    
+    // Log the request object before sending
+    console.log("Request Body:", JSON.stringify(requestBody, null, 2));
+    
+    const response = await fetch("http://localhost:5000/api/match", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestBody),
+    });
+    
+    // Log response status and body
+    console.log("Response Status:", response.status);
+    const data = await response.json();
+    console.log("Response Data:", data);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to process face match. Status: ${response.status}`);
     }
     
-    setLoading(true);
-    setResult("");
-    
-    try {
-      console.log("🔄 Converting images to base64...");
-      
-      const selfieBase64 = await convertToBase64(selfie);
-      const idPhotoBase64 = await convertToBase64(idPhoto);
-      
-      // Debug: Check base64 data
-      console.log("Selfie Base64 Sample:", selfieBase64.substring(0, 50)); // First 50 chars
-      console.log("ID Photo Base64 Sample:", idPhotoBase64.substring(0, 50));  // First 50 chars
-      
-      // Debug: Check image type assignments
-      console.log("Assigned Image Types:", {
-        selfie: 3,  // Selfie should be imageType 3
-        idPhoto: 1   // ID Photo should be imageType 1
-      });
-      
-      const requestBody = {
-        tag: "face_matching",
-        thumbnails: null,
-        images: [
-          { imageType: 3, image: selfieBase64 },
-          { imageType: 1, image: idPhotoBase64 }
-        ]
-      };
-        
-      const response = await fetch("http://localhost:5000/api/match", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestBody),
-      });
-      
-      if (!response.ok) {
-        throw new Error("Failed to process face match.");
-      }
-      
-      const data = await response.json();
-      
-      if (data?.results?.length > 0 && data.results[0].similarity !== undefined) {
-        setResult(`✅ Face match similarity: ${data.results[0].similarity.toFixed(2)}%`);
-      } else {
-        setResult("❌ No valid matching results found.");
-      }
-    } catch (error) {
-      console.error("❌ Error processing face match:", error);
-      setResult(`❌ Error: ${error.message}`);
-    } finally {
-      setLoading(false);
+    if (data?.similarity !== undefined) {
+      setResult(`✅ Face match similarity: ${(data.similarity * 100).toFixed(2)}%`);
+    } else {
+      setResult("No valid matching results found.");
     }
-  };
+  } catch (error) {
+    console.error("Error processing face match:", error);
+    setResult(`Error: ${error.message}`);
+  } finally {
+    setLoading(false);
+  }
+};
+  
   
   return (
     <div className="container">

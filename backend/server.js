@@ -26,6 +26,8 @@ app.get("/license", (req, res) => {
         if (err) {
             console.error("⚠️ Error serving license file:", err);
             res.status(500).json({ error: "Failed to serve license file." });
+        } else {
+            console.log("License file served successfully.");
         }
     });
 });

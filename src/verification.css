@@ -1,6 +1,6 @@
 /* Container */
 .container {
-  max-width: 600px;
+  max-width: 650px;
   margin: 50px auto;
   padding: 20px;
   background: #ffffff;
@@ -86,3 +86,62 @@ input[type="file"] {
   color: #28a745;
 }
 
+/* ========== MEDIA QUERIES FOR RESPONSIVENESS ========== */
+
+/* Large Laptops (1280px and above) */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 700px;
+  }
+}
+
+/* Tablets (768px to 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 500px;
+    padding: 30px;
+
+  }
+  
+  .upload-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .upload-box {
+    width: 100%;
+  }
+}
+
+/* Small Devices (Mobile Phones, 480px and below) */
+@media (max-width: 480px) {
+  .container {
+    max-width: 300px;
+    padding: 15px;
+ 
+  }
+  
+  h1 {
+    font-size: 18px;
+  }
+  
+  .upload-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .upload-box {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .preview-image {
+    width: 80px;
+    height: 100px;
+  }
+
+  .verify-button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

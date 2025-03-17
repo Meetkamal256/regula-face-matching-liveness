@@ -1,19 +1,88 @@
-/* Verification.css */
+/* Container */
 .container {
-  text-align: center;
+  max-width: 600px;
+  margin: 50px auto;
   padding: 20px;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+  font-family: Arial, sans-serif;
 }
 
-.button {
-  margin: 10px;
+h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.upload-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.upload-box {
+  flex: 1;
   padding: 10px;
+  background: #f8f8f8;
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  text-align: center;
   cursor: pointer;
-  background-color: #007bff;
+  transition: border-color 0.3s ease;
+}
+
+.upload-box:hover {
+  border-color: #007bff;
+}
+
+.upload-box label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+input[type="file"] {
+  display: block;
+}
+
+.preview-image {
+  width: 100px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-top: 10px;
+  border: 2px solid #ddd;
+}
+
+.verify-button {
+  background: #007bff;
   color: white;
   border: none;
+  padding: 12px 20px;
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
   border-radius: 5px;
+  transition: background 0.3s ease;
 }
 
-.button:hover {
-  background-color: #0056b3;
+.verify-button:hover {
+  background: #0056b3;
 }
+
+.verify-button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.result-message {
+  font-size: 18px;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #28a745;
+}
+

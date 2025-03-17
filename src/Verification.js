@@ -68,7 +68,7 @@ const handleSubmit = async (event) => {
     };
     
     // Log the request object before sending
-    console.log("Request Body:", JSON.stringify(requestBody, null, 2));
+    // console.log("Request Body:", JSON.stringify(requestBody, null, 2));
     
     const response = await fetch("http://localhost:5000/api/match", {
       method: "POST",
@@ -101,21 +101,26 @@ const handleSubmit = async (event) => {
   
   return (
     <div className="container">
-      <h1>Regula Face Verification</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Upload Selfie</label>
-        <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, setSelfie)} />
-        
-        <label>Upload ID Photo</label>
-        <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, setIdPhoto)} />
-        
-        <button type="submit" className="button" disabled={loading}>
-          {loading ? "Verifying..." : "Upload & Verify"}
-        </button>
-      </form>
-      {result && <p>{result}</p>}
+      <h1>Face Matching Verification</h1>
+      <div className="upload-section">
+        <div className="upload-box">
+          <label>Upload Selfie</label>
+          <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, setSelfie)} />
+          {selfie && <img src={URL.createObjectURL(selfie)} alt="Selfie" className="preview-image" />}
+        </div>
+        <div className="upload-box">
+          <label>Upload ID Photo</label>
+          <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, setIdPhoto)} />
+          {idPhoto && <img src={URL.createObjectURL(idPhoto)} alt="ID" className="preview-image" />}
+        </div>
+      </div>
+      <button type="submit" className="verify-button" onClick={handleSubmit} disabled={loading}>
+        {loading ? "Verifying..." : "Verify Face Match"}
+      </button>
+      {result && <p className="result-message">{result}</p>}
     </div>
   );
 };
 
 export default Verification;
+

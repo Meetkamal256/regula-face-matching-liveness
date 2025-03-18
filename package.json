@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@regulaforensics/facesdk-webclient": "^6.4.85",
+    "@regulaforensics/vp-frontend-face-components": "^6.4.1547",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",

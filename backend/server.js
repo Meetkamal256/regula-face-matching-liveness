@@ -78,6 +78,37 @@ app.post("/api/match", async (req, res) => {
     }
 });
 
+// Proxy request to Regula's Liveness API 
+app.get("/proxy/liveness-start", async (req, res) => {
+    try {
+        console.log("🔄 Forwarding request to Regula Liveness API...");
+        
+        // Use GET instead of POST and pass query parameters if needed
+        const regulaResponse = await axios.get("http://localhost:41101/api/v2/liveness", {
+            headers: { "Content-Type": "application/json" },
+            params: req.query, // Forward any query parameters
+        });
+        
+        console.log("✅ Regula Liveness API Response:", regulaResponse.data);
+        
+        res.json({
+            success: true,
+            code: regulaResponse.data.code,
+            transactionId: regulaResponse.data.transactionId,
+            portrait: regulaResponse.data.portrait, // Captured face image
+            video: regulaResponse.data.video, // Liveness verification video (if applicable)
+            metadata: regulaResponse.data.metadata, // Extra details
+        });
+    } catch (error) {
+        console.error("❌ Failed to call Regula Liveness API:", error.response?.data || error.message);
+        res.status(500).json({
+            error: "Failed to fetch liveness data",
+            details: error.response?.data || error.message,
+        });
+    }
+});
+
+
 app.get("/", (req, res) => {
     res.send("Express.js server is running on port 5000.");
 });

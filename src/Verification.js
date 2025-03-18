@@ -67,17 +67,13 @@ const handleSubmit = async (event) => {
       ]
     };
     
-    // Log the request object before sending
-    // console.log("Request Body:", JSON.stringify(requestBody, null, 2));
-    
+    // Send the request to the backend API
     const response = await fetch("http://localhost:5000/api/match", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestBody),
     });
     
-    // Log response status and body
-    console.log("Response Status:", response.status);
     const data = await response.json();
     console.log("Response Data:", data);
     
@@ -86,7 +82,14 @@ const handleSubmit = async (event) => {
     }
     
     if (data?.similarity !== undefined) {
-      setResult(`✅ Face match similarity: ${(data.similarity * 100).toFixed(2)}%`);
+      const similarityPercentage = (data.similarity * 100).toFixed(2);
+      
+      // Determine if it's a match based on similarity percentage
+      if (data.similarity >= 0.75) {
+        setResult(`✅ Face match similarity: ${similarityPercentage}% (Match)`);
+      } else {
+        setResult(`❌ Face match similarity: ${similarityPercentage}% (Not a match)`);
+      }
     } else {
       setResult("No valid matching results found.");
     }
@@ -97,6 +100,7 @@ const handleSubmit = async (event) => {
     setLoading(false);
   }
 };
+  
   
   
   return (

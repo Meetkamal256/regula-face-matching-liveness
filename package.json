@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@regulaforensics/facesdk-webclient": "^6.2.0",
+    "@regulaforensics/facesdk-webclient": "^6.4.85",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",

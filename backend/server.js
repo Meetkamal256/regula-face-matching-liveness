@@ -33,7 +33,7 @@ app.post("/api/match", async (req, res) => {
         }
         
         const requestBody = {
-            tag: "face_matching",
+            // tag: "face_matching",
             thumbnails: null,
             images: req.body.images.map((img, index) => ({
                 index,

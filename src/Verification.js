@@ -59,7 +59,7 @@ const handleSubmit = async (event) => {
     });
     
     const requestBody = {
-      tag: "face_matching",
+      // tag: "face_matching",
       thumbnails: null,
       images: [
         { imageType: 3, image: selfieBase64 },

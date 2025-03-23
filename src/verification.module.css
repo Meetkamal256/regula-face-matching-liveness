@@ -16,14 +16,14 @@ h1 {
   color: #333;
 }
 
-.upload-section {
+.uploadSection {
   display: flex;
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 20px;
 }
 
-.upload-box {
+.uploadBox {
   flex: 1;
   padding: 10px;
   background: #f8f8f8;
@@ -34,11 +34,11 @@ h1 {
   transition: border-color 0.3s ease;
 }
 
-.upload-box:hover {
+.uploadBox:hover {
   border-color: #007bff;
 }
 
-.upload-box label {
+.uploadBox label {
   display: block;
   font-size: 14px;
   color: #555;
@@ -49,7 +49,7 @@ input[type="file"] {
   display: block;
 }
 
-.preview-image {
+.previewImage {
   width: 100px;
   height: 120px;
   object-fit: cover;
@@ -58,7 +58,7 @@ input[type="file"] {
   border: 2px solid #ddd;
 }
 
-.verify-button {
+.verifyButton {
   background: #007bff;
   color: white;
   border: none;
@@ -70,16 +70,16 @@ input[type="file"] {
   transition: background 0.3s ease;
 }
 
-.verify-button:hover {
+.verifyButton:hover {
   background: #0056b3;
 }
 
-.verify-button:disabled {
+.verifyButton:disabled {
   background: #cccccc;
   cursor: not-allowed;
 }
 
-.result-message {
+.resultMessage {
   font-size: 18px;
   margin-top: 15px;
   font-weight: bold;
@@ -100,15 +100,15 @@ input[type="file"] {
   .container {
     max-width: 500px;
     padding: 30px;
-
+  
   }
   
-  .upload-section {
+  .uploadSection {
     flex-direction: column;
     gap: 15px;
   }
-
-  .upload-box {
+  
+  .uploadBox {
     width: 100%;
   }
 }
@@ -125,22 +125,22 @@ input[type="file"] {
     font-size: 18px;
   }
   
-  .upload-section {
+  .uploadSection {
     flex-direction: column;
     gap: 10px;
   }
   
-  .upload-box {
+  .uploadBox {
     width: 90%;
     padding: 15px;
   }
-
-  .preview-image {
+  
+  .previewImage {
     width: 80px;
     height: 100px;
   }
-
-  .verify-button {
+  
+  .verifyButton {
     font-size: 14px;
     padding: 10px;
   }

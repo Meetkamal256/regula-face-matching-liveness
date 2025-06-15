@@ -11,7 +11,7 @@ A full-stack identity verification system built using **Regula Face SDK**, combi
 
 ## 📌 Features
 
-- 📷 **Face Matching** – Compares a selfie and ID photo using Regula's `/api/match`  
+- 📷 **Face Matching**  – Compares a selfie and ID photo using Regula's `/api/match`  
 - 🧬 **Liveness Test** – Verifies the user is a live person (not a spoof) using Regula's SDK  
 - 🖥️ **React Frontend** – Clean UI with file upload and result rendering  
 - 🌐 **Express Backend** – Hosts Regula license file and handles `/api/match` requests  
